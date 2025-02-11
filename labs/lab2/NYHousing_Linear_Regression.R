@@ -6,13 +6,20 @@ NY_House_Dataset <- read_csv("NY-House-Dataset.csv")
 
 dataset <- NY_House_Dataset
 
-ggplot(dataset, aes(x = log10(PROPERTYSQFT), y = log10(PRICE))) +
-  geom_point()
+dataset <- dataset[complete.cases(dataset[, c("PRICE", "PROPERTYSQFT", "BEDS", "BATH")]), ]
+
 
 ## filter data
 dataset <- dataset[dataset$PRICE<195000000,]
 
 dataset <- dataset[dataset$PROPERTYSQFT!=2184.207862,]
+
+prop_q1 <- quantile(dataset$PROPERTYSQFT, 0.25)
+prop_q3 <- quantile(dataset$PROPERTYSQFT, 0.75)
+prop_iqr <- prop_q3 - prop_q1
+dataset <- dataset[ dataset$PROPERTYSQFT >= (prop_q1 - 1.5 * prop_iqr) &
+                      dataset$PROPERTYSQFT <= (prop_q3 + 1.5 * prop_iqr), ]
+
 
 dataset$PROPERTYSQFT[dataset$BROKERTITLE=="Brokered by Douglas Elliman - 575 Madison Ave"][85]
 
