@@ -20,11 +20,11 @@ dataset$PROPERTYSQFT[dataset$BROKERTITLE=="Brokered by Douglas Elliman - 575 Mad
 names(dataset)
 
 # Models
-## Model 1 Using PROPERTYSQFT as the predictor
-m1 <- lm(log10(PRICE)~log10(PROPERTYSQFT), data = dataset)
-## Model 2 Using PROPERTYSQFT + BEDS as the predictor
+## Model 1 Using PROPERTYSQFT, BEDS, and BATH as the predictors
+m1 <- lm(log10(PRICE)~log10(PROPERTYSQFT) + BEDS + BATH, data = dataset)
+## Model 2 Using PROPERTYSQFT + BEDS as the predictors
 m2 <- lm(log10(PRICE) ~ log10(PROPERTYSQFT) + BEDS, data = dataset)
-## Model 3 Using BATHS + BEDS as the predictor
+## Model 3 Using BATHS + BEDS as the predictors
 m3 <- lm(log10(PRICE) ~ BATH + BEDS, data = dataset)
 
 
