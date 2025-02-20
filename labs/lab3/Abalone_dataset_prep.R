@@ -51,7 +51,7 @@ acc2 <- mean(knn_pred2 == testset$age.group)
 cat("Accuracy of Model 2:", acc2, "\n")
 
 # Model 2 is more accurate
-feature_set <- c("shucked_weight", "viscera_weight", "shell_weight")
+feature_set <- c("shucked_wieght", "viscera_wieght", "shell_weight")
 
 acc_values <- numeric()
 
