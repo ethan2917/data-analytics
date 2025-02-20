@@ -50,8 +50,8 @@ table(Predicted = knn_pred2, Actual = testset$age.group)
 acc2 <- mean(knn_pred2 == testset$age.group)
 cat("Accuracy of Model 2:", acc2, "\n")
 
-# If Model 1 is better
-feature_set <- c("length", "diameter", "height")
+# Model 2 is more accurate
+feature_set <- c("shucked_weight", "viscera_weight", "shell_weight")
 
 acc_values <- numeric()
 
@@ -65,10 +65,9 @@ for(k_val in 1:15) {
   acc_values[k_val] <- mean(pred_temp == testset$age.group)
 }
 
-# Identify the k with the highest accuracy
 best_k <- which.max(acc_values)
 best_acc <- max(acc_values)
-
 cat("Best k:", best_k, "with accuracy:", best_acc, "\n")
+
 
 
