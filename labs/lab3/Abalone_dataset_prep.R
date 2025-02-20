@@ -20,9 +20,6 @@ indexes <- sample(1:nrow(dataset), size = 0.7 * nrow(dataset))
 trainset <- dataset[indexes, ]
 testset  <- dataset[-indexes, ]
 
-
-
-
 # Model 1 uses length, diameter, and height
 knn_pred1 <- knn(
   train = trainset[, c("length", "diameter", "height")],
@@ -92,10 +89,6 @@ set.seed(123)
 final_k <- 5
 
 km_model <- kmeans(best_features_scaled, centers = final_k, nstart = 10)
-
-# Check the cluster assignments
-head(km_model$cluster)
-
 
 plot(
   best_features$shucked_wieght,
