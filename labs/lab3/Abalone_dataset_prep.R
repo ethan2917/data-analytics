@@ -69,5 +69,41 @@ best_k <- which.max(acc_values)
 best_acc <- max(acc_values)
 cat("Best k:", best_k, "with accuracy:", best_acc, "\n")
 
+# Use model 2 subset
+best_features <- dataset[, c("shucked_wieght", "viscera_wieght", "shell_weight")]
 
+best_features_scaled <- scale(best_features)
+
+wss <- numeric()
+
+# Try values from 1 to 10
+for(k in 1:10) {
+  km_out <- kmeans(best_features_scaled, centers = k, nstart = 10)
+  wss[k] <- km_out$tot.withinss
+}
+
+# Plot elbow curve
+plot(1:10, wss, type = "b",
+     xlab = "Number of Clusters (K)",
+     ylab = "Total Within-Cluster SS",
+     main = "Elbow Method for K-Means")
+
+set.seed(123)
+final_k <- 5
+
+km_model <- kmeans(best_features_scaled, centers = final_k, nstart = 10)
+
+# Check the cluster assignments
+head(km_model$cluster)
+
+
+plot(
+  best_features$shucked_wieght,
+  best_features$viscera_wieght,
+  col = km_model$cluster,
+  pch = 19,
+  xlab = "Shucked Weight",
+  ylab = "Viscera Weight",
+  main = paste("K-Means Clusters (K =", final_k, ")")
+)
 
