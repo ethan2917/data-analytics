@@ -137,17 +137,7 @@ print(data.frame(Precision = precision_pca,
                  F1 = f1_pca))
 
 #------------------------------
-# 7. Output the Contingency Tables to a Text File
-#------------------------------
-sink("contingency_tables.txt")
-cat("Contingency Table for Original Data kNN Model:\n")
-print(cm_orig$table)
-cat("\nContingency Table for PC Scores kNN Model:\n")
-print(cm_pca$table)
-sink()  # End writing to the file
-
-#------------------------------
-# 8. Comparison of the Two Classification Models (printed to console)
+# 7. Comparison of the Two Classification Models
 #------------------------------
 cat("Comparison of the Two Models:\n")
 cat("\n--- Original Data kNN Model ---\n")
